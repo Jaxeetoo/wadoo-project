@@ -2,7 +2,8 @@ import React from 'react'
 import {
   Menubar,
   MenubarMenu,
-  MenubarTrigger
+  MenubarTrigger,
+  MenubarItem
 } from "@/components/ui/menubar"
 
 const Overview = () => {
@@ -11,7 +12,9 @@ const Overview = () => {
       <Menubar>
         <MenubarMenu>
           <MenubarTrigger>Kanban</MenubarTrigger>
-          <MenubarTrigger>Drawingboard</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger>Board</MenubarTrigger>
         </MenubarMenu>
       </Menubar>
     </div>
