@@ -1,22 +1,25 @@
-import React from 'react'
-import {
-  Menubar,
-  MenubarMenu,
-  MenubarTrigger,
-  MenubarItem
-} from "@/components/ui/menubar"
+import TabMenu from "@/components/Overview/TabMenu";
+import { useState } from "react";
+
+import Kanban from "@/components/Overview/Kanban";
+import WhiteBoard from "@/components/Overview/WhiteBoard";
 
 const Overview = () => {
+  const [tabSelected, setTabSelected] = useState<string>("");
+  
+  const tabSelectedCallback = (data: string) => {
+    setTabSelected(data);
+  }
+
   return (
     <div>
-      <Menubar>
-        <MenubarMenu>
-          <MenubarTrigger>Kanban</MenubarTrigger>
-        </MenubarMenu>
-        <MenubarMenu>
-          <MenubarTrigger>Board</MenubarTrigger>
-        </MenubarMenu>
-      </Menubar>
+      <TabMenu 
+        onTabSelected={tabSelectedCallback}
+      />
+      {
+        tabSelected === "Kanban" ?
+          <Kanban /> : <WhiteBoard />
+      }
     </div>
   )
 }
