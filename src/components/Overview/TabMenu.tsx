@@ -19,14 +19,16 @@ const TabMenu = ({onTabSelected}: TabMenuProps) => {
   ,[selectedTab])
 
   return (
-    <Menubar className="max-w-64 justify-center">
-      <MenubarMenu>
-        <MenubarTrigger onClick={() => setSelectedTab("Kanban")}>Kanban</MenubarTrigger>
-      </MenubarMenu>
-      <MenubarMenu>
-        <MenubarTrigger onClick={() => setSelectedTab("Board")}>Board</MenubarTrigger>
-      </MenubarMenu>
-    </Menubar>
+    <div className="flex justify-center p-4 ml-[-50em] mt-20">
+      <Menubar className="max-w-fit self-center">
+        <MenubarMenu>
+          <MenubarTrigger onClick={() => setSelectedTab("Kanban")}>Kanban</MenubarTrigger>
+        </MenubarMenu>
+        <MenubarMenu>
+          <MenubarTrigger onClick={() => setSelectedTab("Board")}>Board</MenubarTrigger>
+        </MenubarMenu>
+      </Menubar>
+    </div>
   )
 }
 

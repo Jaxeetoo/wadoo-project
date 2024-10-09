@@ -2,7 +2,9 @@ import React from "react"
 
 const WhiteBoard = () => {
   return (
-    <div>WhiteBoard</div>
+    <div className="bg-slate-500">
+      WhiteBoard
+    </div>
   )
 }
 

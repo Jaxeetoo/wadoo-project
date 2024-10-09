@@ -12,7 +12,7 @@ const Overview = () => {
   }
 
   return (
-    <div>
+    <div className="relative m-4">
       <TabMenu 
         onTabSelected={tabSelectedCallback}
       />

@@ -3,7 +3,7 @@ import React from "react"
 const Kanban = () => {
   //TODO make it so that 
   return (
-    <div>
+    <div className="bg-slate-200 ">
       Kanban
     </div>
   )
