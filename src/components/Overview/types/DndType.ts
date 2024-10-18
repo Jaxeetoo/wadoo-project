@@ -10,3 +10,10 @@ type DNDType = {
     title: string
   }[]
 }
+
+type cardContent = {
+  id: UniqueIdentifier,
+  task: string,
+  state: string,
+  //TODO: Stage 2 of project. be able to assign to a person
+}
