@@ -78,24 +78,25 @@ const Column = (props : columnProps) => {
   }
 
   return (
-    <Card className="bg-red-300 w-56 min-h-72 min-w-56 max-w-96 rounded-[5px]"
+    <Card className="bg-gray-100 w-56 min-h-80 min-w-64 max-w-96 rounded-[8px]"
       ref={setNodeRef}
       style={style}
       onClick={() => 
         {setEditMode(true)}
       }
     >
-      <CardHeader className="flex flex-row justify-between bg-green-200 m-1"
+      <CardHeader className="flex flex-row justify-between m-2 gap-4"
         {...attributes}
         {...listeners}
       >
-        <Badge variant={"outline"} className="flex-none">0</Badge>
-        <Label className="grow font-bold justify-center bg-blue-200">
+        <Badge variant={"task_counter"} className="flex-none">0</Badge>
+        <Label className="grow font-bold py-2 text-balance align-middle">
           {!editMode && column.title}
           {editMode && 
           <Input 
             value={column.title}
             onChange={e=> updateColumn(column.id, e.target.value)}
+            maxLength={12}
             autoFocus={true}
             onBlur={() => {setEditMode(false)}}
             onKeyDown={e => {
@@ -106,20 +107,20 @@ const Column = (props : columnProps) => {
 
         </Label>
         <Button
-          className="flex-none mt-1 mr-1 overflow-hidden rounded-[5px]"
+          className="flex-none mt-1 mr-1 overflow-hidden "
           size={"icon"}
-          variant={"ghost"}
+          variant={"kanban_delete"}
           onClick={() => onDeleteColumn(column.id)}
           
           >
           <TrashIcon />
         </Button>
       </CardHeader>
-      <CardContent className="bg-amber-500">
+      <CardContent className="">
         Content
       </CardContent>
       <CardFooter className="justify-center">
-        <Button size={"sm"} variant={"ghost"} className="p-1">
+        <Button variant={"kanban_addition"}>
           <PlusIcon className="m-0"/>
           <Label>Add Column</Label> 
         </Button>

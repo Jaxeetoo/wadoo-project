@@ -19,9 +19,24 @@ import { ColumnType } from "./types/ColumnType";
 import { createPortal } from "react-dom";
 import { TaskType } from "./types/TaskType";
 
+const DEFAULT_COLUMNS = [
+  {
+    id: 1,
+    title: "To Do"
+  },
+  {
+    id: 2,
+    title: "In Progress"
+  },
+  {
+    id: 3,
+    title: "Completed"
+  }
+]
+
 const Kanban = () => {
 
-  const [columns, setColumns] = useState<ColumnType[]>([]);
+  const [columns, setColumns] = useState<ColumnType[]>(DEFAULT_COLUMNS);
   const [activeColumn, setActiveColumn] = useState<ColumnType | null >(null);
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const columnIDs = useMemo(() => columns.map(col=> col.id),[columns]);
@@ -86,13 +101,10 @@ const Kanban = () => {
   }
 
   return (
-    <div className="bg-slate-200 ">
-      <div className="flex flex-row justify-between px-4 py-2">
-        <Label className="text-lg">Title</Label>
+    <div className="p-4">
 
-      </div>
         <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd} sensors={sensor}>
-          <div className="flex flex-row gap-4 overflow-x-auto bg-green-500 px-4">
+          <div className="flex flex-row gap-4 overflow-x-auto px-4">
             <SortableContext items={columnIDs}>
               {
                 columns?.map((columnProps, index) => (
@@ -107,7 +119,7 @@ const Kanban = () => {
             </SortableContext>
           
             <Button 
-              className="flex flex-row items-start pt-4 rounded-[.25rem] justify-center w-56 min-h-72 min-w-56 max-w-96" 
+              className="p-4 rounded-[.5rem] justify-center w-56  min-w-56 max-w-96" 
               variant={"outline"}
               onClick={addColumn}
             > 

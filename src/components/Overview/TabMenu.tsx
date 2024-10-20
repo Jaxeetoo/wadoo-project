@@ -19,8 +19,8 @@ const TabMenu = ({onTabSelected}: TabMenuProps) => {
   ,[selectedTab])
 
   return (
-    <div className="flex justify-start ml-52 p-4 mt-20">
-      <Menubar className="max-w-fit self-center">
+    <div className="flex justify-start ml-4 p-4 mt-20">
+      <Menubar defaultChecked defaultValue={selectedTab} className="max-w-fit self-center">
         <MenubarMenu>
           <MenubarTrigger onClick={() => setSelectedTab("Kanban")}>Kanban</MenubarTrigger>
         </MenubarMenu>

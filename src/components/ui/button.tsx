@@ -19,6 +19,8 @@ const buttonVariants = cva(
           "bg-zinc-100 text-zinc-900 shadow-sm hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80",
         ghost: "hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
         link: "text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50",
+        kanban_addition: "bg-gray-100 hover:bg-white rounded-full border-none shadow-none",
+        kanban_delete: "shadow-none border-none rounded-full bg-gray-100 hover:bg-red-600 hover:text-white"
       },
       size: {
         default: "h-8 px-4",
