@@ -6,6 +6,13 @@ import {
   MenubarTrigger
 } from "@/components/ui/menubar";
 
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
+} from "@/components/ui/tabs";
+
 interface TabMenuProps {
   onTabSelected: (data: string) => void
 }
@@ -20,14 +27,12 @@ const TabMenu = ({onTabSelected}: TabMenuProps) => {
 
   return (
     <div className="flex justify-start ml-4 p-4 mt-20">
-      <Menubar defaultChecked defaultValue={selectedTab} className="max-w-fit self-center">
-        <MenubarMenu>
-          <MenubarTrigger onClick={() => setSelectedTab("Kanban")}>Kanban</MenubarTrigger>
-        </MenubarMenu>
-        <MenubarMenu>
-          <MenubarTrigger onClick={() => setSelectedTab("Board")}>Board</MenubarTrigger>
-        </MenubarMenu>
-      </Menubar>
+      <Tabs defaultValue="Kanban" className="max-w-fit self-center">
+        <TabsList>
+          <TabsTrigger value="Kanban">Kanban</TabsTrigger>
+          <TabsTrigger value="Board">Board</TabsTrigger>
+        </TabsList>
+      </Tabs>
     </div>
   )
 }

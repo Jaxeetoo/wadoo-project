@@ -101,8 +101,7 @@ const Kanban = () => {
   }
 
   return (
-    <div className="p-4">
-
+    <div>
         <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd} sensors={sensor}>
           <div className="flex flex-row gap-4 overflow-x-auto px-4">
             <SortableContext items={columnIDs}>
