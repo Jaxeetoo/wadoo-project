@@ -29,7 +29,11 @@ import {
 
 import {
   ColumnType
-} from "./types/ColumnType";
+} from "./types/DndType";
+
+import {
+  TaskType
+} from "./types/DndType";
 
 import {
   useSortable
@@ -42,15 +46,19 @@ import {
 import {
   PlusIcon
 } from "@radix-ui/react-icons";
+import { UniqueIdentifier } from "@dnd-kit/core";
+import TaskCard from "./TaskCard";
 
 interface columnProps {
   column: ColumnType;
-  onDeleteColumn: (id: number) => void;
-  updateColumn: (id: number, title:string ) => void
+  onDeleteColumn: (id: UniqueIdentifier) => void;
+  updateColumn: (id: UniqueIdentifier, title:string ) => void;
+
+  createTask: (columnID: UniqueIdentifier) => void;
 }
 
 const Column = (props : columnProps) => {
-  const {column, onDeleteColumn, updateColumn}  = props;
+  const { column, onDeleteColumn, updateColumn}  = props;
   const [editMode, setEditMode] = useState<boolean>(false);
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: column.id,
@@ -89,7 +97,7 @@ const Column = (props : columnProps) => {
         {...attributes}
         {...listeners}
       >
-        <Badge variant={"task_counter"} className="flex-none">0</Badge>
+        <Badge variant={"task_counter"} className="flex-none">{column.items.length}</Badge>
         <Label className="grow font-bold py-2 text-balance align-middle">
           {!editMode && column.title}
           {editMode && 
@@ -116,8 +124,15 @@ const Column = (props : columnProps) => {
           <TrashIcon />
         </Button>
       </CardHeader>
-      <CardContent className="">
-        Content
+      <CardContent className="flex p-2 justify-center">
+        {column.items.length === 0 ? 
+        <Label className="text-center">No Tasks Available</Label>
+        : 
+        column.items?.map((item, index) => (
+          <TaskCard 
+            key={index}
+          />
+        ))}
       </CardContent>
       <CardFooter className="justify-center">
         <Button variant={"kanban_addition"}>

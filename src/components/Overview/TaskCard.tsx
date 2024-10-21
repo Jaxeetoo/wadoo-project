@@ -6,12 +6,19 @@ import {
   CardHeader
 } from "@/components/ui/card"
 
+import {
+  TaskType
+} from "./types/DndType"
+interface taskProps {
+  taskType: TaskType;
+}
+
 const TaskCard = () => {
   
   return (
-    <div>
-      
-    </div>
+    <Card>
+
+    </Card>
   )
 }
 

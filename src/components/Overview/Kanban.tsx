@@ -11,26 +11,41 @@ import {
 import {
   Label
 } from "@/components/ui/label";
-import { DndContext, DragEndEvent, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { 
+  DndContext, 
+  DragEndEvent, 
+  DragOverlay, 
+  DragStartEvent, 
+  PointerSensor, 
+  UniqueIdentifier, 
+  useSensor, 
+  useSensors
+} from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
 import Column from "./Column";
-import { ColumnType } from "./types/ColumnType";
+import { ColumnType } from "./types/DndType";
 import { createPortal } from "react-dom";
-import { TaskType } from "./types/TaskType";
+import { TaskType } from "./types/DndType";
+import { nanoid } from "nanoid";
+import { customAlphabet } from "nanoid";
+
 
 const DEFAULT_COLUMNS = [
   {
-    id: 1,
-    title: "To Do"
+    id: nanoid(5),
+    title: "To Do",
+    items: []
   },
   {
-    id: 2,
-    title: "In Progress"
+    id: nanoid(5),
+    title: "In Progress",
+    items: []
   },
   {
-    id: 3,
-    title: "Completed"
+    id: nanoid(5),
+    title: "Completed",
+    items: []
   }
 ]
 
@@ -39,12 +54,14 @@ const Kanban = () => {
   const [columns, setColumns] = useState<ColumnType[]>(DEFAULT_COLUMNS);
   const [activeColumn, setActiveColumn] = useState<ColumnType | null >(null);
   const [tasks, setTasks] = useState<TaskType[]>([]);
-  const columnIDs = useMemo(() => columns.map(col=> col.id),[columns]);
+  const columnIDs = useMemo(() => columns.map(col=> col.id),[columns]); 
   
   const addColumn = () => {
+    const nanoid = customAlphabet("1234567890abc", 5)
     const newColumn: ColumnType = {
-      id: columns.length + 1, 
-      title: "test"
+      id: nanoid(), //* MAKE A FUNCTION FOR CREATING A UNIQUE ID
+      title: "New Column",
+      items: []
     }
 
     //TODO MAKE IT SO THAT IT WOULD MAKE THE USER INPUT SOMETHING
@@ -52,7 +69,7 @@ const Kanban = () => {
     setColumns([...columns, newColumn]);
   }
 
-  const removeColumn = (id: number) => {
+  const removeColumn = (id: UniqueIdentifier) => {
     setColumns((col) => col.filter((column)=> column.id != id))
   }
 
@@ -90,7 +107,7 @@ const Kanban = () => {
     })
   }
   
-  const onUpdateColumn = (id: number, title: string) => {
+  const onUpdateColumn = (id: UniqueIdentifier, title: string) => {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col;
 
