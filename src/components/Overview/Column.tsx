@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import {
   TrashIcon
@@ -36,6 +36,7 @@ import {
 } from "./types/DndType";
 
 import {
+  SortableContext,
   useSortable
 } from "@dnd-kit/sortable";
 
@@ -48,17 +49,20 @@ import {
 } from "@radix-ui/react-icons";
 import { UniqueIdentifier } from "@dnd-kit/core";
 import TaskCard from "./TaskCard";
+import { create } from "domain";
 
 interface columnProps {
   column: ColumnType;
   onDeleteColumn: (id: UniqueIdentifier) => void;
-  updateColumn: (id: UniqueIdentifier, title:string ) => void;
+  updateColumn: (id: UniqueIdentifier, title: string ) => void;
 
   createTask: (columnID: UniqueIdentifier) => void;
+  onDeleteTask: (id: UniqueIdentifier) => void;
+  onUpdateTask: (id: UniqueIdentifier, content: string) => void;
+  tasks: TaskType[];
 }
 
-const Column = (props : columnProps) => {
-  const { column, onDeleteColumn, updateColumn}  = props;
+const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask, onUpdateTask, tasks} : columnProps) => {
   const [editMode, setEditMode] = useState<boolean>(false);
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: column.id,
@@ -69,6 +73,10 @@ const Column = (props : columnProps) => {
     disabled: editMode
   });
 
+  const taskIDs = useMemo(() => {
+    return tasks.map(task => task.id);
+  }, [tasks]);
+
   const style = {
     transition,
     transform: CSS.Transform.toString(transform)
@@ -78,7 +86,7 @@ const Column = (props : columnProps) => {
   {
     return(
     <div
-      className="w-56 min-h-72 min-w-56 max-w-96 rounded-[5px] bg-red-300 border-cyan-950 opacity-50"
+      className="min-h-72 min-w-72 max-w-96 rounded-[5px] bg-red-300 border-cyan-950 opacity-50"
       ref={setNodeRef}
       style={style}>
     </div>
@@ -86,16 +94,17 @@ const Column = (props : columnProps) => {
   }
 
   return (
-    <Card className="bg-gray-100 w-56 min-h-80 min-w-64 max-w-96 rounded-[8px]"
+    <Card className="relative flex flex-col justify-between min-w-72 max-w-96 min-h-[40rem] max-h-[40rem] rounded-[8px] bg-gray-100 "
       ref={setNodeRef}
       style={style}
-      onClick={() => 
-        {setEditMode(true)}
-      }
+      
     >
-      <CardHeader className="flex flex-row justify-between m-2 gap-4"
+      <CardHeader className="flex flex-row justify-between m-1 gap-4 rounded-[.35rem] bg-slate-950 text-white"
         {...attributes}
         {...listeners}
+        onClick={() => {
+          setEditMode(true);
+        }}
       >
         <Badge variant={"task_counter"} className="flex-none">{column.items.length}</Badge>
         <Label className="grow font-bold py-2 text-balance align-middle">
@@ -106,7 +115,9 @@ const Column = (props : columnProps) => {
             onChange={e=> updateColumn(column.id, e.target.value)}
             maxLength={12}
             autoFocus={true}
-            onBlur={() => {setEditMode(false)}}
+            onBlur={() => {
+              setEditMode(false)
+            }}
             onKeyDown={e => {
               if (e.key !== "Enter") return;
               setEditMode(false)
@@ -117,27 +128,40 @@ const Column = (props : columnProps) => {
         <Button
           className="flex-none mt-1 mr-1 overflow-hidden "
           size={"icon"}
-          variant={"kanban_delete"}
+          variant={"kanban_delete_dark"}
           onClick={() => onDeleteColumn(column.id)}
           
           >
           <TrashIcon />
         </Button>
       </CardHeader>
-      <CardContent className="flex p-2 justify-center">
-        {column.items.length === 0 ? 
+      <CardContent className="p-2 max-h-full overflow-y-auto">
+        <div className="flex flex-col gap-4">
+        {tasks.length === 0 ? 
         <Label className="text-center">No Tasks Available</Label>
-        : 
-        column.items?.map((item, index) => (
-          <TaskCard 
-            key={index}
-          />
-        ))}
+        :
+        <SortableContext items={taskIDs}>
+          {tasks.map((item, index) => (
+              <TaskCard 
+                taskType = {item}
+                deleteTask = {onDeleteTask}
+                updateTask = {onUpdateTask}
+                key={index}
+              />
+            ))
+          }
+        </SortableContext>  
+        }
+        </div>
       </CardContent>
-      <CardFooter className="justify-center">
-        <Button variant={"kanban_addition"}>
+      <CardFooter className="justify-center  bg-green-200">
+        <Button variant={"kanban_addition"} 
+          onClick={() => {
+            createTask(column.id)
+          }}
+          className="">
           <PlusIcon className="m-0"/>
-          <Label>Add Column</Label> 
+          <Label>Add Task</Label> 
         </Button>
       </CardFooter>
     </Card>

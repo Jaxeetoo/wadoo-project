@@ -11,6 +11,6 @@ export type ColumnType = {
 export type TaskType = {
   id: UniqueIdentifier,
   columnID: UniqueIdentifier,
-  task: string,
+  content: string,
   //TODO: Stage 2 of project. be able to assign to a person
 }

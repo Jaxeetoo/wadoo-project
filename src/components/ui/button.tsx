@@ -20,13 +20,14 @@ const buttonVariants = cva(
         ghost: "hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
         link: "text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-50",
         kanban_addition: "bg-gray-100 hover:bg-white rounded-full border-none shadow-none",
-        kanban_delete: "shadow-none border-none rounded-full bg-gray-100 hover:bg-red-600 hover:text-white"
+        kanban_delete: "shadow-none border-none rounded-full bg-gray-100 hover:bg-red-600 hover:text-white",
+        kanban_delete_dark: "shadow-none border-none rounded-full bg-slate-950 hover:text-red-500"
       },
       size: {
         default: "h-8 px-4",
         sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-10 rounded-md px-8",
-        icon: "h-9 w-9",
+        icon: "min-h-9 min-w-9",
         custom:"h-4 px-4"
       },
     },
