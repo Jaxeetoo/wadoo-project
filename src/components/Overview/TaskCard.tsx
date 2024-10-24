@@ -58,6 +58,7 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
   if (editMode){
     return (
       <Card 
+        className="rounded-[.15rem]"
         ref={setNodeRef}
         style={style}
         {...attributes}
@@ -86,6 +87,7 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
 
   return (
     <Card 
+      
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -98,7 +100,7 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
         setIsMouseOver(false);
       }}
 
-      className="w-full hover:outline-8 hover:shadow-inner hover:border-cyan-500 "
+      className="w-full rounded-[.15rem] hover:outline-8 hover:shadow-inner hover:border-cyan-500 "
     >
       <CardContent className="relative flex justify-between p-4 min-h-fit max-h-fit">
         <p className="grow">

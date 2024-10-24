@@ -95,11 +95,11 @@ const Kanban = () => {
     const newTask: TaskType = {
       id: nanoid(),
       columnID,
-      content: `Something`
+      content: `Task ${tasks.length + 1}`
     }
     
 
-    console.log(`did click ${columnID} tasks count:${tasks.length}`)
+    //console.log(`did click ${columnID} tasks count:${tasks.length}`)
 
     setTasks([...tasks, newTask]);
   }
@@ -212,6 +212,8 @@ const Kanban = () => {
                   onUpdateTask={updateTask}
                   tasks={tasks.filter(grpedTasks => grpedTasks.columnID === columnProps.id)}
                   key={index}
+
+                  className="h-fit"
                 />
             ))
           }
@@ -238,6 +240,7 @@ const Kanban = () => {
               onDeleteTask={deleteTask}
               onUpdateTask={updateTask}
               tasks={tasks.filter(grpedTasks => grpedTasks.columnID === activeColumn.id)}
+              className="h-fit"
             />
           }
           {

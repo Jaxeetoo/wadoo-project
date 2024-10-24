@@ -60,9 +60,13 @@ interface columnProps {
   onDeleteTask: (id: UniqueIdentifier) => void;
   onUpdateTask: (id: UniqueIdentifier, content: string) => void;
   tasks: TaskType[];
+
+  className: string;
 }
 
-const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask, onUpdateTask, tasks} : columnProps) => {
+const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask, onUpdateTask, tasks, className} : columnProps) => {
+  const [isHovering, setIsHovering] = useState<boolean>(false);
+  
   const [editMode, setEditMode] = useState<boolean>(false);
   const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
     id: column.id,
@@ -86,7 +90,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
   {
     return(
     <div
-      className="min-h-72 min-w-72 max-w-96 rounded-[5px] bg-red-300 border-cyan-950 opacity-50"
+      className="min-h-72 min-w-72 max-w-96 rounded-[5px] bg-gray-300 border-cyan-950 opacity-50"
       ref={setNodeRef}
       style={style}>
     </div>
@@ -94,7 +98,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
   }
 
   return (
-    <Card className="relative flex flex-col justify-between min-w-72 max-w-96 min-h-[40rem] max-h-[40rem] rounded-[8px] bg-gray-100 "
+    <Card className={`relative flex flex-col my-4   justify-between min-w-72 max-w-96 rounded-[8px] bg-gray-100 ${className}`}
       ref={setNodeRef}
       style={style}
       
@@ -106,7 +110,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
           setEditMode(true);
         }}
       >
-        <Badge variant={"task_counter"} className="flex-none">{column.items.length}</Badge>
+        <Badge variant={"task_counter"} className="flex-none">{tasks.length}</Badge>
         <Label className="grow font-bold py-2 text-balance align-middle">
           {!editMode && column.title}
           {editMode && 
@@ -136,10 +140,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
         </Button>
       </CardHeader>
       <CardContent className="p-2 max-h-full overflow-y-auto">
-        <div className="flex flex-col gap-4">
-        {tasks.length === 0 ? 
-        <Label className="text-center">No Tasks Available</Label>
-        :
+        <div className="flex flex-col gap-2">
         <SortableContext items={taskIDs}>
           {tasks.map((item, index) => (
               <TaskCard 
@@ -151,17 +152,20 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
             ))
           }
         </SortableContext>  
-        }
+        
         </div>
       </CardContent>
-      <CardFooter className="justify-center  bg-green-200">
-        <Button variant={"kanban_addition"} 
+      <CardFooter className="justify-start flex grow bottom-0 p-2">
+        <Button 
+          variant={"kanban_addition"} 
           onClick={() => {
             createTask(column.id)
           }}
-          className="">
-          <PlusIcon className="m-0"/>
-          <Label>Add Task</Label> 
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          className={`w-full transition-all duration-75 ease-in-out ${isHovering ? 'animate-shadow-inner' : 'animate-shadow-inner-leave'} hover:shadow-inner `}>
+          <PlusIcon className="m-1"/>
+          <Label className="text-left">Add Task</Label> 
         </Button>
       </CardFooter>
     </Card>
