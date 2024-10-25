@@ -1,9 +1,11 @@
 import React from "react"
+import { Tldraw } from 'tldraw'
+import 'tldraw/tldraw.css'
 
 const WhiteBoard = () => {
   return (
-    <div className="bg-slate-500">
-      WhiteBoard
+    <div className="w-screen h-screen">
+      <Tldraw persistenceKey="example"/>
     </div>
   )
 }

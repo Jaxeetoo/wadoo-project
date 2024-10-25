@@ -196,10 +196,22 @@ const Kanban = () => {
     setColumns(newColumns);
   }
 
+  const element = document.querySelector(".test");
+
+  element?.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    
+
+    element.scrollBy({
+      left: event.deltaY < 0 ? -30 : 30,
+      
+    });
+  });
+
   return (
     <div>
       <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} sensors={sensor}>
-        <div className="flex flex-row gap-4 overflow-x-auto px-4">
+        <div className="flex flex-row gap-4 overflow-x-auto px-4 test">
           <SortableContext items={columnIDs}>
             {
               columns?.map((columnProps, index) => (
@@ -220,7 +232,7 @@ const Kanban = () => {
           </SortableContext>
         
           <Button 
-            className="p-4 rounded-[.5rem] justify-center w-56  min-w-56 max-w-96" 
+            className="my-4 p-6 rounded-[.5rem] justify-center w-56  min-w-56 max-w-96" 
             variant={"outline"}
             onClick={addColumn}
           > 

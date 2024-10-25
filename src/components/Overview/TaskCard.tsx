@@ -40,7 +40,7 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
   });
   const style = {
     transition,
-    transform: CSS.Transform.toString(transform)
+    transform: CSS.Translate.toString(transform)
   }
 
   const toggleEditMode = () => {
@@ -50,8 +50,16 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
 
   if (isDragging){
     return (
-    <Card ref={setNodeRef} style={style} >
-      dragging</Card>
+    <Card 
+      ref={setNodeRef} 
+      style={style} 
+      className="rounded-[.15rem] bg-gray-300 opacity-50">
+        <CardContent
+          className="relative p-4 min-h-fit max-h-36">
+            <p className="opacity-50">{taskType.content}</p>
+
+        </CardContent>
+    </Card>
     );
   }
 

@@ -83,14 +83,14 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
 
   const style = {
     transition,
-    transform: CSS.Transform.toString(transform)
+    transform: CSS.Translate.toString(transform)
   }
 
   if (isDragging)
   {
     return(
     <div
-      className="min-h-72 min-w-72 max-w-96 rounded-[5px] bg-gray-300 border-cyan-950 opacity-50"
+      className="my-4 min-h-72 min-w-72 max-w-96 rounded-[5px] bg-gray-300 border-cyan-950 opacity-50"
       ref={setNodeRef}
       style={style}>
     </div>
@@ -98,7 +98,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
   }
 
   return (
-    <Card className={`relative flex flex-col my-4   justify-between min-w-72 max-w-96 rounded-[8px] bg-gray-100 ${className}`}
+    <Card className={`relative flex flex-col my-4  justify-between min-w-72 max-w-96 rounded-[8px] bg-gray-100 ${className}`}
       ref={setNodeRef}
       style={style}
       

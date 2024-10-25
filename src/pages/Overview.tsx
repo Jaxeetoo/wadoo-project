@@ -14,7 +14,7 @@ import WhiteBoard from "@/components/Overview/WhiteBoard";
 const Overview = () => {
   return (
     <div className="">
-      <Tabs defaultValue="Kanban" className=" relative m-4 px-4 md:px-24 lg:px-56 justify-center max-w-fit">
+      <Tabs defaultValue="Kanban" className="relative m-4 px-4 md:px-24 lg:px-56 justify-center max-w-fit">
         <TabsList className="ml-4 rounded-[.5rem] mt-10">
           <TabsTrigger value="Kanban" className="rounded-[.3rem]">Kanban</TabsTrigger>
           <TabsTrigger value="Board" className="rounded-[.3rem]">Board</TabsTrigger>
