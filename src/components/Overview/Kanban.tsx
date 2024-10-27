@@ -196,22 +196,21 @@ const Kanban = () => {
     setColumns(newColumns);
   }
 
-  const element = document.querySelector(".test");
+  const element = document.querySelector(".horizontal-scroll") as HTMLElement;
 
-  element?.addEventListener('wheel', (event) => {
-    event.preventDefault();
+  element.addEventListener('wheel', (event: WheelEvent) => {
+    event.preventDefault(); 
     
-
     element.scrollBy({
       left: event.deltaY < 0 ? -30 : 30,
-      
+      behavior: "smooth"
     });
   });
 
   return (
     <div>
       <DndContext onDragStart={onDragStart} onDragEnd={onDragEnd} onDragOver={onDragOver} sensors={sensor}>
-        <div className="flex flex-row gap-4 overflow-x-auto px-4 test">
+        <div className="flex flex-row gap-4 overflow-x-auto px-4 horizontal-scroll">
           <SortableContext items={columnIDs}>
             {
               columns?.map((columnProps, index) => (
