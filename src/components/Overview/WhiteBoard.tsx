@@ -4,8 +4,8 @@ import 'tldraw/tldraw.css'
 
 const WhiteBoard = () => {
   return (
-    <div className="w-screen h-screen">
-      <Tldraw persistenceKey="example"/>
+    <div className="w-screen h-screen bg-slate-700">
+      
     </div>
   )
 }
