@@ -29,11 +29,11 @@ import {
 
 import {
   ColumnType
-} from "./types/DndType";
+} from "../types/DndType";
 
 import {
   TaskType
-} from "./types/DndType";
+} from "../types/DndType";
 
 import {
   SortableContext,
@@ -132,7 +132,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
         <Button
           className="flex-none mt-1 mr-1 overflow-hidden "
           size={"icon"}
-          variant={"kanban_delete_dark"}
+          variant={"kb_del"}
           onClick={() => onDeleteColumn(column.id)}
           
           >
@@ -157,7 +157,7 @@ const Column = ({ column, onDeleteColumn, updateColumn, createTask, onDeleteTask
       </CardContent>
       <CardFooter className="justify-start flex grow bottom-0 p-2">
         <Button 
-          variant={"kanban_addition"} 
+          variant={"kb_add"} 
           onClick={() => {
             createTask(column.id)
           }}

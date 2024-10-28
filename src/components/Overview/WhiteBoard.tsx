@@ -1,11 +1,12 @@
 import React from "react"
-import { Tldraw } from 'tldraw'
-import 'tldraw/tldraw.css'
+
+import Canvas from "./Whiteboard/Canvas"
+
 
 const WhiteBoard = () => {
   return (
     <div className="w-screen h-screen bg-slate-700">
-      
+      <Canvas />
     </div>
   )
 }

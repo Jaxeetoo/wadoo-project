@@ -9,7 +9,7 @@ import {
 
 import {
   TaskType
-} from "./types/DndType";
+} from "../types/DndType";
 
 import {
   CSS
@@ -118,7 +118,7 @@ const TaskCard = ({ taskType, deleteTask, updateTask } : taskProps) => {
           <Button
             className={isMouseOver ? "absolute top-1/2 -translate-y-1/2 right-4 justify-center h-4" : "hidden" }
             size={"icon"}
-            variant={"kanban_delete"}
+            // variant={""}
             onClick={() => {
               deleteTask(taskType.id);
             }}

@@ -24,13 +24,13 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 
-import Column from "./Column";
+import Column from "./KanbanBoard/Column";
 import { ColumnType } from "./types/DndType";
 import { createPortal } from "react-dom";
 import { TaskType } from "./types/DndType";
 import { nanoid } from "nanoid";
 import { customAlphabet } from "nanoid";
-import TaskCard from "./TaskCard";
+import TaskCard from "./KanbanBoard/TaskCard";
 
 
 const DEFAULT_COLUMNS = [
@@ -198,7 +198,7 @@ const Kanban = () => {
 
   const element = document.querySelector(".horizontal-scroll") as HTMLElement;
 
-  element.addEventListener('wheel', (event: WheelEvent) => {
+  element?.addEventListener('wheel', (event: WheelEvent) => {
     event.preventDefault(); 
     
     element.scrollBy({
