@@ -1,4 +1,4 @@
-// import TabMenu from "@/components/Overview/TabMenu";
+// import TabMenu from "@/components/ProjectBoard/TabMenu";
 import { useState } from "react";
 
 import {
@@ -8,10 +8,10 @@ import {
   TabsTrigger
 } from "@/components/ui/tabs";
 
-import Kanban from "@/components/Overview/Kanban";
-import WhiteBoard from "@/components/Overview/WhiteBoard";
+import Kanban from "@/components/ProjectBoard/Kanban";
+import WhiteBoard from "@/components/ProjectBoard/WhiteBoard";
 
-const Overview = () => {
+const ProjectBoard = () => {
   return (
     <div className="flex justify-center">
       <Tabs defaultValue="Kanban" className="relative">
@@ -30,4 +30,4 @@ const Overview = () => {
   )
 }
 
-export default Overview
+export default ProjectBoard

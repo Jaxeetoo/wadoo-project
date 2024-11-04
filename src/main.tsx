@@ -8,18 +8,18 @@ import {
 import './index.css'
 
 import ErrorPage from './pages/ErrorPage';
-import Dashboard from './pages/Dashboard';
-import Overview from './pages/Overview';
+import Home from './pages/Home';
+import ProjectBoard from './pages/ProjectBoard';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
+    element: <Home />,
     errorElement: <ErrorPage />
   },
   {
-    path: "/overview",
-    element: <Overview />,
+    path: "/projectboard",
+    element: <ProjectBoard />,
     errorElement: <ErrorPage />
   }
 ]);
