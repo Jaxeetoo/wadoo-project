@@ -1,29 +1,28 @@
 
-import { Label } from "@/components/ui/label";
+import { 
+  Label
+} from "@/components/ui/label";
 import {
   Menubar,
   MenubarMenu,
-  MenubarTrigger,
-  MenubarContent,
-  MenubarItem
+  MenubarTrigger
 } from "@/components/ui/menubar";
 
-
+import NewProjectDrawer from "@/components/Home/NewProjectDrawer";
 
 const Home = () => {
   return (
-    <div className='relative flex flex-col items-center justify-center p-10 bg-slate-50'>
-      <Label className="">Your Workspace</Label>
-      <Menubar className="w-1/2">
-        <MenubarMenu>
-          <MenubarTrigger>New Project</MenubarTrigger>
-          
-        </MenubarMenu>
-        <MenubarMenu>
-        <MenubarTrigger>Test</MenubarTrigger>
-        </MenubarMenu>
-      </Menubar>
-
+    <div className='relative p-10 mt-16 flex justify-center items-center'>
+      <div className="flex items-center min-w-[50%] max-w-[50%] justify-between ">
+        <Label className="text-xl">Your Projects</Label>
+        <Menubar className="w-content">
+          <MenubarMenu>
+            <MenubarTrigger>
+              <NewProjectDrawer />
+            </MenubarTrigger>
+          </MenubarMenu>
+        </Menubar>
+      </div>
     </div>
   )
 }

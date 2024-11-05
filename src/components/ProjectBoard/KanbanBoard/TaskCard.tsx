@@ -3,8 +3,6 @@ import {useState} from "react";
 import {
   Card,
   CardContent,
-  CardTitle,
-  CardHeader
 } from "@/components/ui/card";
 
 import {
