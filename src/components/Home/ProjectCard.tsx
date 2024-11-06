@@ -14,8 +14,9 @@ interface ProjectCardProps {
 const ProjectCard = (props: ProjectCardProps) => {
   const { project_details } = props;
   return (
-    <Card className='min-w-[8rem] max-w-[16rem] h-[5rem] p-4 text-wrap' onClick={() => {console.log(project_details.project_id)}}>
-      <CardTitle>
+    <Card className='min-w-[8rem] max-w-[16rem] h-[5rem] p-4 text-wrap cursor-pointer hover:bg-gray-100' 
+    onClick={() => {console.log(project_details.project_id)}}>
+      <CardTitle >
         {project_details.project_name}
       </CardTitle>
     </Card>
