@@ -8,7 +8,7 @@ import {
   MenubarTrigger
 } from "@/components/ui/menubar";
 
-import NewProjectDrawer from "@/components/Home/NewProjectDrawer";
+import NewProjectDialog from "@/components/Home/NewProjectDialog";
 
 const Home = () => {
   return (
@@ -18,7 +18,12 @@ const Home = () => {
         <Menubar className="w-content">
           <MenubarMenu>
             <MenubarTrigger>
-              <NewProjectDrawer />
+              <NewProjectDialog />
+            </MenubarTrigger>
+          </MenubarMenu>
+          <MenubarMenu>
+            <MenubarTrigger>
+              Sort by
             </MenubarTrigger>
           </MenubarMenu>
         </Menubar>
