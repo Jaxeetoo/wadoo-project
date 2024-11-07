@@ -13,10 +13,15 @@ interface ProjectCardProps {
 
 const ProjectCard = (props: ProjectCardProps) => {
   const { project_details } = props;
+
+  const navigateToProject = () => {
+    //TODO add functionality wherein it transferes to the project 
+  }
+
   return (
-    <Card className='min-w-[8rem] max-w-[16rem] h-[5rem] p-4 text-wrap cursor-pointer hover:bg-gray-100' 
+    <Card className='md:max-w-[10rem] lg:max-w-[25rem] h-[5rem] p-4 rounded-[.3rem] cursor-pointer hover:bg-gray-100' 
     onClick={() => {console.log(project_details.project_id)}}>
-      <CardTitle >
+      <CardTitle>
         {project_details.project_name}
       </CardTitle>
     </Card>

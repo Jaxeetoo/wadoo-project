@@ -13,6 +13,7 @@ import NewProjectDialog from "@/components/Home/NewProjectDialog";
 
 import { ProjectDetails } from "@/components/Home/types/ProjectType";
 import ProjectCard from "@/components/Home/ProjectCard";
+import MainNavbar from "@/components/MainNavbar";
 
 const TEST_DEFAULT = [
   {
@@ -50,34 +51,42 @@ const TEST_DEFAULT = [
 const Home = () => {
   const [projectCards, setProjectCards] = useState<ProjectDetails[]>(TEST_DEFAULT);
 
-  return (
-    <div className='relative p-10 mt-16 flex flex-col justify-center items-center'>
-      <div className="flex items-center min-w-[50%] max-w-[50%] justify-between ">
-        <Label className="text-xl">Your Projects</Label>
-        <Menubar className="w-content">
-          <MenubarMenu>
-            <MenubarTrigger>
-              <NewProjectDialog />
-            </MenubarTrigger>
-          </MenubarMenu>
-          <MenubarMenu>
-            <MenubarTrigger>
-              Sort by
-            </MenubarTrigger>
-          </MenubarMenu>
-        </Menubar>
-      </div>
-      <div className="grid grid-cols-3 gap-[1rem] pt-4">
-        {
-          projectCards?.map((projectDetails, index) => (
-            <ProjectCard 
-              key={index}
-              project_details={projectDetails}
-            />
+  const addProject = (newProject: ProjectDetails) => {
+    setProjectCards([...projectCards, newProject]);
+  }
 
-          ))
-        }
+  return (
+    <div className='relative flex flex-col justify-center items-center'>
+      <MainNavbar />
+      <div className="w-[55%]">
+        <div className="flex items-center w-full justify-between mt-16 ">
+          <Label className="text-xl">Your Projects</Label>
+          <Menubar className="w-content">
+            <MenubarMenu>
+              <MenubarTrigger>
+                <NewProjectDialog />
+              </MenubarTrigger>
+            </MenubarMenu>
+            <MenubarMenu>
+              <MenubarTrigger>
+                Sort by
+              </MenubarTrigger>
+            </MenubarMenu>
+          </Menubar>
+        </div>
+        <div className="grid grid-cols-3 gap-[1rem] w-full pt-4">
+          {
+            projectCards?.map((projectDetails, index) => (
+              <ProjectCard 
+                key={index}
+                project_details={projectDetails}
+              />
+
+            ))
+          }
+        </div>
       </div>
+      
     </div>
   )
 }
