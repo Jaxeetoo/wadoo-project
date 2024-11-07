@@ -3,17 +3,25 @@ import { useState } from "react";
 import { 
   Label
 } from "@/components/ui/label";
-import {
-  Menubar,
-  MenubarMenu,
-  MenubarTrigger
-} from "@/components/ui/menubar";
+
+import { 
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectLabel
+ } from "@/components/ui/select";
 
 import NewProjectDialog from "@/components/Home/NewProjectDialog";
 
 import { ProjectDetails } from "@/components/Home/types/ProjectType";
 import ProjectCard from "@/components/Home/ProjectCard";
 import MainNavbar from "@/components/MainNavbar";
+import { Input } from "@/components/ui/input";
+
+
 
 const TEST_DEFAULT = [
   {
@@ -61,18 +69,21 @@ const Home = () => {
       <div className="w-[55%]">
         <div className="flex items-center w-full justify-between mt-16 ">
           <Label className="text-xl">Your Projects</Label>
-          <Menubar className="w-content">
-            <MenubarMenu>
-              <MenubarTrigger>
-                <NewProjectDialog />
-              </MenubarTrigger>
-            </MenubarMenu>
-            <MenubarMenu>
-              <MenubarTrigger>
-                Sort by
-              </MenubarTrigger>
-            </MenubarMenu>
-          </Menubar>
+          <div className="flex justify-end gap-2">
+            <Input placeholder="Search" className="w-[40%]" />
+            <Select>
+              <SelectTrigger className="w-[10rem]">
+                <SelectValue placeholder="sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ascending">ascending</SelectItem>
+                <SelectItem value="descending">descending</SelectItem>
+                <SelectItem value="date_created">date created</SelectItem>
+              </SelectContent>
+            </Select>
+            <NewProjectDialog />
+
+          </div>
         </div>
         <div className="grid grid-cols-3 gap-[1rem] w-full pt-4">
           {

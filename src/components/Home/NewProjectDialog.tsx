@@ -38,9 +38,9 @@ const NewProjectDialog = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen} >
-      <DialogTrigger className="flex justify-between" onClick={() => setIsOpen(true)}>
+      <DialogTrigger className="flex justify-between bg-zinc-200 shadow-md p-2 rounded-[.1rem] cursor-pointer hover:bg-gray-100" onClick={() => setIsOpen(true)}>
         <PlusIcon />
-        <Label>New Project</Label>
+        <Label className='text-nowrap'>New Project</Label>
       </DialogTrigger>
       <DialogPortal>
         <DialogOverlay className='opacity-70'>
