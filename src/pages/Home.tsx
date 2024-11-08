@@ -4,15 +4,7 @@ import {
   Label
 } from "@/components/ui/label";
 
-import { 
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  SelectLabel
- } from "@/components/ui/select";
+import dayjs from "dayjs";
 
 import NewProjectDialog from "@/components/Home/NewProjectDialog";
 
@@ -29,31 +21,36 @@ const TEST_DEFAULT = [
     creator_id:"test",
     project_creator:"me",
     project_id:"lorem",
-    project_name:"1st"
+    project_name:"1st",
+    date_created: new Date()
   },
   {
     creator_id:"test",
     project_creator:"me",
     project_id:"lorem2",
-    project_name:"john Doe"
+    project_name:"john Doe",
+    date_created: new Date()
   },
   {
     creator_id:"test",
     project_creator:"me",
     project_id:"lorem3",
-    project_name:"project overview"
+    project_name:"project overview",
+    date_created: new Date()
   },
   {
     creator_id:"test",
     project_creator:"me",
     project_id:"lorem4",
-    project_name:"long title"
+    project_name:"long title",
+    date_created: new Date()
   },
   {
     creator_id:"test",
     project_creator:"me",
     project_id:"lorem5",
-    project_name:"fifth Lorem Ipsum what is this test fifty thigns to edo lore"
+    project_name:"fifth Lorem Ipsum what is this test fifty thigns to edo lore",
+    date_created: new Date()
   },
 ]
 
@@ -65,21 +62,24 @@ const Home = () => {
   }
 
   const sortProjects = (value: string) => {
+    console.log("sorting");
     switch(value)
     {
       case "ascending":
-        setProjectCards(projectCards.sort((x ,y) => x.project_name.localeCompare(y.project_name)))
+        const ascendingItems = [...projectCards].sort((x ,y) => x.project_name.toLowerCase().localeCompare(y.project_name.toLowerCase()))
+        setProjectCards(ascendingItems)
       break;
       case "descending":
-
+        const descendingItems = [...projectCards].sort((x ,y) => y.project_name.toLowerCase().localeCompare(x.project_name.toLowerCase()))
+        setProjectCards(descendingItems)
       break;
       case "date_created":
-
+        const dateCreatedSort = [...projectCards].sort((x ,y) => dayjs(x.date_created).diff(dayjs(y.date_created)))
+        setProjectCards(dateCreatedSort)
       break;
       default:
-
-
-
+        const defaultSort = [...projectCards].sort((x ,y) => x.project_name.toLowerCase().localeCompare(y.project_name.toLowerCase()))
+        setProjectCards(defaultSort)
     }
   }
 

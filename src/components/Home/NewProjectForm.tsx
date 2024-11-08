@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 
+import * as dayjs  from "dayjs";
+
 import {
   Form,
   FormControl,
@@ -51,11 +53,13 @@ const NewProjectForm = (props: NewProjProps) => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
 
+    
     AddProject({
       creator_id: "",
       project_creator: project_creator,
       project_id: newProjectID(),
-      project_name: values.project_name
+      project_name: values.project_name,
+      date_created: new Date()
     });
 
     SetState(false);
