@@ -27,18 +27,29 @@ import {
 } from "@radix-ui/react-icons";
 
 import NewProjectForm from './NewProjectForm';
+import { ProjectDetails } from './types/ProjectType';
 
-const NewProjectDialog = () => {
+interface newProjectDialogProps {
+  addProject: (newProject: ProjectDetails) => void;
+}
+
+const NewProjectDialog = (props: newProjectDialogProps) => {
   const [isOpen, setIsOpen] = useState<boolean>();
-  const cancelButtonContent = () => <DialogClose onClick={() => setIsOpen(false)}>Cancel</DialogClose>;
+  const { addProject } = props;
+
+  
+
+  const cancelButtonContent = () => <DialogClose onClick={() => setIsOpen(false)}>Cancel</DialogClose>
+  
 
   const changeOpenState = (state: boolean) => {
     setIsOpen(state);
-  }
+  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen} >
-      <DialogTrigger className="flex justify-between bg-zinc-200 shadow-md p-2 rounded-[.1rem] cursor-pointer hover:bg-gray-100" onClick={() => setIsOpen(true)}>
+      <DialogTrigger className="flex justify-between bg-zinc-200 shadow-md p-2 rounded-[.1rem] cursor-pointer hover:bg-gray-100" 
+        onClick={() => setIsOpen(true)}>
         <PlusIcon />
         <Label className='text-nowrap'>New Project</Label>
       </DialogTrigger>
@@ -53,6 +64,7 @@ const NewProjectDialog = () => {
               project_creator="me"
               CancelButton={cancelButtonContent}
               SetState = {changeOpenState}
+              AddProject= {addProject}
             />
           </DialogContent>
         </DialogOverlay>

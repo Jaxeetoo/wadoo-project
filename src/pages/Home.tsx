@@ -70,7 +70,8 @@ const Home = () => {
         <div className="flex items-center w-full justify-between mt-16 ">
           <Label className="text-xl">Your Projects</Label>
           <div className="flex justify-end gap-2">
-            <Input placeholder="Search" className="w-[40%]" />
+            <Input placeholder="Search" className="w-[40%]">
+            </Input>
             <Select>
               <SelectTrigger className="w-[10rem]">
                 <SelectValue placeholder="sort by" />
@@ -81,7 +82,7 @@ const Home = () => {
                 <SelectItem value="date_created">date created</SelectItem>
               </SelectContent>
             </Select>
-            <NewProjectDialog />
+            <NewProjectDialog addProject={addProject}/>
 
           </div>
         </div>

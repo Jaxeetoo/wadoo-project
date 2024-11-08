@@ -13,13 +13,20 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "../ui/button";
+import { ProjectDetails } from "./types/ProjectType";
+
+import {
+  newProjectID
+} from "@/lib/utils";
 
 interface NewProjProps {
   project_creator: string;
   CancelButton: React.ComponentType;
   SetState: (state: boolean) => void;
+  AddProject: (newProject: ProjectDetails) => void;
 }
 
 const formSchema = z.object({
@@ -28,31 +35,30 @@ const formSchema = z.object({
         message: "project name must be atleast 1 character"
     }).max(60,{
       message: "Can only contain up until 60 characters"
-    }),
-  project_creator: z.string()
+    })
   
 });
 
 const NewProjectForm = (props: NewProjProps) => {
-  const { project_creator, CancelButton, SetState } = props;
+  const { project_creator, CancelButton, SetState, AddProject } = props;
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       project_name: "",
-      project_creator:""
     }
   })
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    values.project_creator = project_creator;
-    console.log(values)
-    SetState(false);
-    //TODO close dialog
 
-    
+    AddProject({
+      creator_id: "",
+      project_creator: project_creator,
+      project_id: newProjectID(),
+      project_name: values.project_name
+    });
+
+    SetState(false);
   }
 
   return (
