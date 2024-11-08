@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import ProjectCard from "@/components/Home/ProjectCard";
 import MainNavbar from "@/components/MainNavbar";
 import SortButton from "@/components/Home/SortButton";
+import SearchItem from "@/components/Home/SearchItem";
 
 
 
@@ -56,9 +57,13 @@ const TEST_DEFAULT = [
 
 const Home = () => {
   const [projectCards, setProjectCards] = useState<ProjectDetails[]>(TEST_DEFAULT);
+  const [filteredItems, setFilteredItems] = useState<ProjectDetails[]>([]);
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const addProject = (newProject: ProjectDetails) => {
     setProjectCards([...projectCards, newProject]);
+    setFilteredItems([...projectCards, newProject]);
   }
 
   const sortProjects = (value: string) => {
@@ -83,6 +88,16 @@ const Home = () => {
     }
   }
 
+  const searchItems = (query: string) => {
+    if (query === "" || query === " ")
+    {
+      setFilteredItems(projectCards);
+    } else 
+    {
+      setFilteredItems(projectCards.filter((item) => item.project_name.toLowerCase().includes(query.toLowerCase())))
+    }
+  }
+
   return (
     <div className='relative flex flex-col justify-center items-center'>
       <MainNavbar />
@@ -90,16 +105,15 @@ const Home = () => {
         <div className="flex items-center w-full justify-between mt-16 ">
           <Label className="text-xl">Your Projects</Label>
           <div className="flex justify-end gap-2">
-            <Input placeholder="Search" className="w-[40%]">
-            </Input>
+            
+            <SearchItem filterItemsFunc={searchItems}/>
             <SortButton callbackFunc={sortProjects}/>
             <NewProjectDialog addProject={addProject}/>
-
           </div>
         </div>
         <div className="grid grid-cols-3 gap-[1rem] w-full pt-4">
           {
-            projectCards?.map((projectDetails, index) => (
+            filteredItems?.map((projectDetails, index) => (
               <ProjectCard 
                 key={index}
                 project_details={projectDetails}
@@ -109,7 +123,6 @@ const Home = () => {
           }
         </div>
       </div>
-      
     </div>
   )
 }
