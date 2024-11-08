@@ -17,9 +17,10 @@ import {
 import NewProjectDialog from "@/components/Home/NewProjectDialog";
 
 import { ProjectDetails } from "@/components/Home/types/ProjectType";
+import { Input } from "@/components/ui/input";
 import ProjectCard from "@/components/Home/ProjectCard";
 import MainNavbar from "@/components/MainNavbar";
-import { Input } from "@/components/ui/input";
+import SortButton from "@/components/Home/SortButton";
 
 
 
@@ -63,6 +64,25 @@ const Home = () => {
     setProjectCards([...projectCards, newProject]);
   }
 
+  const sortProjects = (value: string) => {
+    switch(value)
+    {
+      case "ascending":
+        setProjectCards(projectCards.sort((x ,y) => x.project_name.localeCompare(y.project_name)))
+      break;
+      case "descending":
+
+      break;
+      case "date_created":
+
+      break;
+      default:
+
+
+
+    }
+  }
+
   return (
     <div className='relative flex flex-col justify-center items-center'>
       <MainNavbar />
@@ -72,16 +92,7 @@ const Home = () => {
           <div className="flex justify-end gap-2">
             <Input placeholder="Search" className="w-[40%]">
             </Input>
-            <Select>
-              <SelectTrigger className="w-[10rem]">
-                <SelectValue placeholder="sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ascending">ascending</SelectItem>
-                <SelectItem value="descending">descending</SelectItem>
-                <SelectItem value="date_created">date created</SelectItem>
-              </SelectContent>
-            </Select>
+            <SortButton callbackFunc={sortProjects}/>
             <NewProjectDialog addProject={addProject}/>
 
           </div>
