@@ -53,7 +53,6 @@ const NewProjectForm = (props: NewProjProps) => {
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
 
-    
     AddProject({
       creator_id: "",
       project_creator: project_creator,

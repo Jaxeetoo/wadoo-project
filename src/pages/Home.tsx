@@ -56,7 +56,7 @@ const TEST_DEFAULT = [
 ]
 
 const Home = () => {
-  const [projectCards, setProjectCards] = useState<ProjectDetails[]>(TEST_DEFAULT);
+  const [projectCards, setProjectCards] = useState<ProjectDetails[]>([]);
   const [filteredItems, setFilteredItems] = useState<ProjectDetails[]>([]);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
