@@ -21,38 +21,47 @@ import { PasswordInput } from "@/components/ui/password-input";
 
 
 const formSchema = z.object({
-  username: z.string().min(4),
-  email: z.string().email(),
-  password: z.string().min(1,
-    {
-        message: "project name must be atleast 1 character"
-    }).max(60,{
-      message: "Can only contain up until 60 characters"
+  username: z.string().min(4, {
+    message:"username must be at least 4 characters"
     }),
-  confirm_password: z.string().min(1,
+  email: z.string().email(),
+  password: z.string().min(8,
     {
-        message: "project name must be atleast 1 character"
-    }).max(60,{
-      message: "Can only contain up until 60 characters"
+        message: "password must be atleast 8 characters"
+    }),
+  confirm_password: z.string()
+}).superRefine((val, ctx) => {
+  
+  if (val.confirm_password !== val.password)
+  {
+    ctx.addIssue({
+      code: "custom",
+      message: "passwords did not match",
+      path: ['confirm_password', 'password']
     })
+  }
+
+
 });
 
 const NewAccountForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      username: "",
       email: "",
-      password: ""
+      password: "",
+      confirm_password: ""
     }
   })
 
-  const onSubmit = () => {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
 
   }
 
   return (
     <Form {...form} >
-      <form onSubmit={onSubmit} className="space-y-4 pt-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-4">
       <FormField
           control={form.control}
           name="username"
@@ -101,7 +110,7 @@ const NewAccountForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full">
+        <Button type="submit" className="w-full">
           <Label>Create New Account</Label>
         </Button>
       </form>

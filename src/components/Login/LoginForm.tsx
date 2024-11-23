@@ -20,34 +20,35 @@ import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
 
 
-const formSchema = z.object({
+const signInSchema = z.object({
   email: z.string().email(),
-  password: z.string().min(1,
-    {
-        message: "project name must be atleast 1 character"
-    }).max(60,{
-      message: "Can only contain up until 60 characters"
-    })
+  password: z.string()
 });
 
 
 const LoginForm = () => {
+  const {
+    handleSubmit,
+    control,
+    setError,
+    formState: { errors },
+  } = useForm();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: ""
     }
   })
 
-  const onSubmit = () => {
-
+  const onSubmit = (values: z.infer<typeof signInSchema>) => {
+    console.log(values);
   }
 
   return (
     <Form {...form} >
-      <form onSubmit={onSubmit} className="space-y-4 pt-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 pt-4">
         <FormField
           control={form.control}
           name="email"
@@ -57,6 +58,7 @@ const LoginForm = () => {
               <FormControl>
                 <Input id="user_email" type="email" {...field}/>
               </FormControl>
+              {errors.email && <FormMessage>Invalid Email</FormMessage>}
             </FormItem>
           )}
         />
@@ -69,10 +71,11 @@ const LoginForm = () => {
               <FormControl>
                 <PasswordInput id="user_password" {...field} />
               </FormControl>
+              {errors.password && <FormMessage>incorrect password</FormMessage>}
             </FormItem>
           )}
         />
-        <Button className="w-full">
+        <Button type="submit" className="w-full">
           <Label>Sign In</Label>
         </Button>
       </form>

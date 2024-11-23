@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { Input } from "@/components/ui/input";
 import { EyeOpenIcon, EyeClosedIcon } from "@radix-ui/react-icons";
 
 export interface PasswordInputProps
