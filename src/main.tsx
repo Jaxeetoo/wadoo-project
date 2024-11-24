@@ -11,6 +11,10 @@ import ErrorPage from './pages/ErrorPage';
 import Home from './pages/Home';
 import ProjectBoard from './pages/ProjectBoard';
 import Login from './pages/Login';
+import dotenv from 'dotenv';
+
+// Load environment variables from .env.local (if it exists)
+dotenv.config({ path: '.env.local' });
 
 const router = createBrowserRouter([
   {

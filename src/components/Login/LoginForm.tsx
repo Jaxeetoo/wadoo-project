@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { PasswordInput } from "@/components/ui/password-input";
 
+import { SignIn } from "@/backend/auth/sign-in";
 
 const signInSchema = z.object({
   email: z.string().email(),
@@ -43,7 +44,7 @@ const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof signInSchema>) => {
-    console.log(values);
+    SignIn(values.email, values.password).then( data => console.log('test'))
   }
 
   return (
