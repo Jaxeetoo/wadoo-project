@@ -1,10 +1,9 @@
-import { createClient } from '@supabase/supabase-js'
-// import { supabaseClient } from '../client'
+import { createClient, AuthResponse, AuthError  } from '@supabase/supabase-js'
 
-export async function SignIn(email: string, password: string): Promise<any>
+export async function SignIn(email: string, password: string): Promise<AuthResponse>
 {
-  const supabaseUrl = process.env.SUPABASE_URL as string;
-  const supabaseKey = process.env.API_KEY as string;
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_API_KEY as string;
   const supabaseClient = createClient(supabaseUrl, supabaseKey);
 
   try {
@@ -12,10 +11,20 @@ export async function SignIn(email: string, password: string): Promise<any>
       email: email,
       password: password,
     })
-    console.log(data);
-    if (error) console.log(error);
-    return data;
-  } catch(error: any) {
-    console.error(error);
+
+    if (error) {
+      console.error('Error signing in:', error.message);
+    }
+    return { data, error } as AuthResponse;
+
+  } catch {
+
+    return {
+      data: { user: null, session: null},
+      error: { 
+        message: 'Unexpected error occurred during sign-in',
+        status: 500 // Use a default HTTP status code for server errors
+      } as AuthError,
+    };
   }
 }

@@ -44,7 +44,10 @@ const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof signInSchema>) => {
-    SignIn(values.email, values.password).then( data => console.log('test'))
+    SignIn(values.email, values.password)
+      .then( data => {
+        
+      })
   }
 
   return (
